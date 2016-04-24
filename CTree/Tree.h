@@ -37,12 +37,6 @@ class CNode
         CNode(char data, CNode* t_left, CNode* t_right);
         CNode(string, CNode* t_left);
         ~CNode();
-        //CNode* TieLeft(CNode* MyLeft);
-        //CNode* TieRight(CNode* MyRight);
-
-        //void PutNum(c_type tp, double num);
-        //void PutSign(c_type tp, char sg);
-        //void PutVar(c_type tp, char vr);
         c_type GetType() { return type; }
         double GetNum() { return num; }
         char GetSign() { return sign; }
@@ -54,5 +48,10 @@ class CNode
         friend CNode* derivate(const CNode*);
         friend CNode* const_optimization(const CNode*);
 };
+
+void print_data(ofstream& latex, CNode* tree);
+int print_node(ofstream& latex, CNode* tree);
+int print_graph(ofstream& output, CNode* tree);
+int print_tree(CNode* tree);
 
 #endif 
