@@ -13,7 +13,7 @@ class CVector
         int size_;
         T data_[MAX_SIZE];
     public:
-        CVector();
+        CVector(int _size);
         ~CVector();
         int Vsize()
         {
@@ -22,7 +22,7 @@ class CVector
         CVector<T> operator + (CVector<T>& val)
         {
             assert(size_ == val.Vsize());
-            CVector<T> exp;
+            CVector<T> exp(size_);
             int i;
             for(i = 0; i < size_; i++)
                 exp[i] = data_[i] + val[i];
@@ -43,12 +43,47 @@ class CVector
             return exp;
         }
         void VDump();
+        class iter
+        {
+        private:
+            T* data_;
+        public:
+            iter(T* dt)
+            {
+                data_ = dt;
+            }
+            void operator ++ ()
+            {
+                data_ += 1;
+                return;
+            }
+            T operator * ()
+            {
+                return *data_;
+            }
+            bool operator != (iter now)
+            {
+                if(data_ != now.data_)
+                    return true; 
+                else
+                    return false;
+            }
+
+        };
+        iter begin()
+        {
+            return iter(&data_[0]);
+        }
+        iter end()
+        {
+            return iter(&data_[size_ - 1]);
+        }
 };
 
 type
-CVector<T>::CVector()
+CVector<T>::CVector(int _size)
 {
-    size_ = 5;
+    size_ = _size;
     int i;
     for(i = 0; i < size_; i++)
         data_[i] = 0;
@@ -77,7 +112,7 @@ template <>
 CVector<bool> CVector<bool>::operator + (CVector<bool>& val) 
 {
 	assert(size_ == val.Vsize());
-	CVector<bool> exp;
+	CVector<bool> exp(size_);
 	int i;
 	for(i = 0; i < size_; i++)
 		exp[i] = (data_[i] + val[i]) % 2;
@@ -87,7 +122,7 @@ CVector<bool> CVector<bool>::operator + (CVector<bool>& val)
 
 int main()
 {
-    CVector<double> V, V1, V2;
+    CVector<double> V(5), V1(5), V2(5);
     int i;
     for(i = 0; i < V.Vsize(); i++)
     {
@@ -102,7 +137,7 @@ int main()
     double sk = V1 ^ V2;
     cout << "scalar product = "<< sk << endl;
 
-	CVector<bool> V3, V4, V5;
+	CVector<bool> V3(5), V4(5), V5(5);
 	for(i = 0; i < V.Vsize(); i++)
 		{
 		    V3[i] = (7 * i + 1) % 2;
@@ -112,5 +147,11 @@ int main()
     V4.VDump();
     V5 = V3 + V4;
     V5.VDump();
+
+    for(/*CVector<double>:: iter*/auto it = V.begin(); it != V.end(); ++it)
+    {
+        cout << *it << " ";
+    }
+    cout << *V.end()<< endl;
     return 0;
 }
