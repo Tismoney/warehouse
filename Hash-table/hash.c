@@ -69,21 +69,13 @@ int hash_add(hash_ptr pointer, FILE* file)
 	char* val;
 		//Divider
 	char ch[2] = ":";
+	char dv[2] = "\n";
 
 	while(fgets(str, 164, file) != NULL)
 	{
 		key = strtok(str, ch);
 		val = str + strlen(key) + 1;
-
-			//Delete '\n'
-		if(strstr(val, "\n") != NULL)
-		{
-			memcpy(tmp, val, strstr(val, "\n")-val);
-			tmp[strstr(val, "\n")-val]=0;
-			strcat(tmp, strstr(val, "\n")+strlen("\n"));
-			strcpy(val, tmp);
-		}
-
+		val = strtok(val, dv);
 		hash = hash_FAQ6(key);
 
 		while(pointer[hash].is_full)
