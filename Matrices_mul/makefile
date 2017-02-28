@@ -8,7 +8,7 @@ CFLAGS	= $(DEBUG) -W -Wall
 LIBS 	= -lpthread -lm
 LDFLAGS	= $(DEBUG)
 
-OBJS	= main.c matrices.o synchronize.o get_time.o
+OBJS	= main.o matrices.o synchronize.o get_time.o
 
 
 all: $(NAME)

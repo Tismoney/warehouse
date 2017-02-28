@@ -34,7 +34,7 @@ void matrices_mult(double* matrix_one, double* matrix_two, double* result,
 						int dim_one, int dim_mid, int dim_two,
 						int thread_num, int total_treads)
 {
-	int i, j, m;
+	int i, j, k, m;
 	double *pc;
 	int first_row, last_row, len;
 
@@ -42,12 +42,14 @@ void matrices_mult(double* matrix_one, double* matrix_two, double* result,
 	last_row  = dim_one * (thread_num + 1) / total_treads - 1;
 
 	len = (last_row - first_row + 1) * dim_one;
-	for(m = 0, pc = result + first_row * dim_one; m < len; m++)
+	pc = result + first_row * dim_one;
+	for(m = 0; m < len; m++)
 	{
 		*pc = 0.;
-		i = (int)(m / dim_two);
+		i = first_row + (int)(m / dim_two);
+		k = m - (int)(m / dim_two) * dim_two; 
 		for(j = 0; j < dim_mid; j++)
-			*pc += matrix_one[i * dim_one + j] * matrix_two[j*dim_two + m];
+			*pc += matrix_one[i * dim_one + j] * matrix_two[j*dim_two + k];
 		pc++;
 	}
 	synchronize(total_treads);
