@@ -8,7 +8,7 @@ CFLAGS	= $(DEBUG) -W -Wall
 LIBS 	= -lpthread -lm
 LDFLAGS	= $(DEBUG)
 
-OBJS	= main.o matrices.o synchronize.o get_time.o
+OBJS	= main.o matrices/matrices.o synchronize/synchronize.o get_time/get_time.o
 
 
 all: $(NAME)
@@ -22,7 +22,7 @@ $(NAME): $(OBJS)
 clean:
 	rm -f $(OBJS) $(NAME)
 
-main.o:			main.c matrices.h
-matrices.o:		matrices.c matrices.h synchronize.h
-synchronize.o: 	synchronize.c synchronize.h
-get_time.o: 	get_time.c get_time.h
+main.o:			main.c matrices/matrices.o
+matrices/matrices.o:		matrices/matrices.c matrices/matrices.h synchronize/synchronize.h
+synchronize/synchronize.o: 	synchronize/synchronize.c synchronize/synchronize.h
+get_time/get_time.o: 	get_time/get_time.c get_time/get_time.h
