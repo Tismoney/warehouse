@@ -13,10 +13,15 @@ typedef struct
 	//Function of changed size of the stack
 void stack_resize(stack* st)
 {
-    st -> size = 2*st -> size;
-    st -> name = (elem_t*) realloc (st -> name, 2*(st -> size));
-    if (st -> name == NULL)
-    	printf("Cannot alocated memory\n");
+    if (stack_ok(st))
+    {
+        st -> size = 2*st -> size;
+        st -> name = (elem_t*) realloc (st -> name, 2*(st -> size));
+        if (st -> name == NULL)
+        	printf("Cannot alocated memory\n");
+    }
+    else
+        printf("You will not work with incorrect stack\n");
 }
 
 	//Function of check status of the stack
