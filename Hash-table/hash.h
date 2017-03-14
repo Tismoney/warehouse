@@ -9,7 +9,6 @@
 #include <math.h>
 
 
-
 //-----------------------------------------------------------------//
 //---------------------------Hash-table----------------------------//
 //-----------------------------------------------------------------//
@@ -43,7 +42,7 @@ hash_ptr hash_ctor();
 
 
 	//Destructor of hash-table
-int hash_dtor(hash_ptr pointer);
+void hash_dtor(hash_ptr pointer);
 		//Delete a hash table: delete all values and free all memory
 
 

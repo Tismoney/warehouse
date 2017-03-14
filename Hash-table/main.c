@@ -42,7 +42,6 @@ int main()
 	hash_dtor(hash1);
 	hash_dtor(hash2);
 
-
 	 	//We couldn`t work with hashes
 	hash_add(hash2,file1);
 

@@ -37,7 +37,7 @@ hash_ptr hash_ctor()
 	return (hash_ptr)malloc(sizeof(hash_table) * SIZE);
 }
 
-int hash_dtor(hash_ptr pointer)
+void hash_dtor(hash_ptr pointer)
 {
 	for(int i = 0; i < SIZE; i++)
 	{
@@ -77,6 +77,7 @@ int hash_add(hash_ptr pointer, FILE* file)
 		val = str + strlen(key) + 1;
 		val = strtok(val, dv);
 		hash = hash_FAQ6(key);
+		hash_check = hash;
 
 		while(pointer[hash].is_full)
 		{
@@ -240,7 +241,7 @@ int hash_dump_key(hash_ptr pointer, KEY key)
 		return num;
 	else
 	{
-		printf("I`m so sory, but there aren`t element with this key.\n");
+		printf("I`m so sorry, but there aren`t elements with this key.\n");
 		return 0;
 	}
 }
